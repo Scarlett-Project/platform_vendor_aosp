@@ -173,6 +173,10 @@ endif
 endif
 PRODUCT_SYSTEM_DEFAULT_PROPERTIES += \
     ro.face.moto_unlock_service=$(TARGET_FACE_UNLOCK_SUPPORTED)
+	
+# World APN list
+PRODUCT_COPY_FILES += \
+    vendor/aosp/prebuilt/common/etc/apns-conf.xml:$(TARGET_COPY_OUT_PRODUCT)/etc/apns-conf.xml
 
 # Branding
 include vendor/aosp/config/branding.mk
