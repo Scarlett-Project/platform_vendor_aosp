@@ -184,4 +184,5 @@ include vendor/aosp/config/branding.mk
 # OTA
 include vendor/aosp/config/ota.mk
 
--include $(WORKSPACE)/build_env/image-auto-bits.mk
+# Sounds
+include vendor/aosp/config/sounds.mk
