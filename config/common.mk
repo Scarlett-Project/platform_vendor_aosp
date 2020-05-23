@@ -130,6 +130,18 @@ PRODUCT_SYSTEM_DEFAULT_PROPERTIES += \
 PRODUCT_PACKAGES += \
     misc_writer_system \
     themed_bootanimation
+	
+# Bootanimation
+ifeq ($(TARGET_BOOT_ANIMATION_RES),1080)
+     PRODUCT_COPY_FILES += vendor/aosp/bootanimation/bootanimation-dark_1080.zip:$(TARGET_COPY_OUT_PRODUCT)/media/bootanimation-dark.zip
+else
+    ifeq ($(TARGET_BOOT_ANIMATION_RES),)
+        $(warning "Aospify: TARGET_BOOT_ANIMATION_RES is undefined, assuming 1080p")
+    else
+        $(warning "Aospify: Current bootanimation res is not supported, forcing 1080p")
+    endif
+    PRODUCT_COPY_FILES += vendor/aosp/bootanimation/bootanimation-dark_1080.zip:$(TARGET_COPY_OUT_PRODUCT)/media/bootanimation-dark.zip
+endif
 
 # Screen recorder
 PRODUCT_PACKAGES += \
@@ -152,14 +164,5 @@ include vendor/aosp/config/branding.mk
 
 # OTA
 include vendor/aosp/config/ota.mk
-
-# GApps
-include vendor/gapps/config.mk
-
-# Pixel Style
-include vendor/pixelstyle/config.mk
-
-# Customization
-include vendor/google-customization/config.mk
 
 -include $(WORKSPACE)/build_env/image-auto-bits.mk
