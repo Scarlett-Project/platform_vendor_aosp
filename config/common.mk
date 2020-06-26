@@ -1,4 +1,4 @@
-PRODUCT_BRAND ?= PixelExperience
+PRODUCT_BRAND ?= Aospify
 
 PRODUCT_BUILD_PROP_OVERRIDES += BUILD_UTC_DATE=0
 
@@ -186,3 +186,5 @@ include vendor/aosp/config/ota.mk
 
 # Sounds
 include vendor/aosp/config/sounds.mk
+
+-include $(WORKSPACE)/build_env/image-auto-bits.mk
