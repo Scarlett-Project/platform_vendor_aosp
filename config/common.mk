@@ -137,25 +137,17 @@ PRODUCT_PACKAGES += \
 PRODUCT_DEXPREOPT_SPEED_APPS += \
     SystemUI \
     NexusLauncherRelease
-
-# Themed bootanimation
-TARGET_MISC_BLOCK_OFFSET ?= 0
-PRODUCT_SYSTEM_DEFAULT_PROPERTIES += \
-    ro.misc.block.offset=$(TARGET_MISC_BLOCK_OFFSET)
-PRODUCT_PACKAGES += \
-    misc_writer_system \
-    themed_bootanimation
 	
 # Bootanimation
-ifeq ($(TARGET_BOOT_ANIMATION_RES),1080)
-     PRODUCT_COPY_FILES += vendor/aosp/bootanimation/bootanimation-dark_1080.zip:$(TARGET_COPY_OUT_PRODUCT)/media/bootanimation-dark.zip
+ifeq ($(TARGET_HAS_BOOT_ANIMATION),true)
+     PRODUCT_COPY_FILES += vendor/aosp/bootanimation/bootanimation.zip:$(TARGET_COPY_OUT_PRODUCT)/media/bootanimation.zip
 else
-    ifeq ($(TARGET_BOOT_ANIMATION_RES),)
-        $(warning "Aospify: TARGET_BOOT_ANIMATION_RES is undefined, assuming 1080p")
+    ifeq ($(TARGET_HAS_BOOT_ANIMATION),)
+        $(warning "Aospify: TARGET_HAS_BOOT_ANIMATION is undefined, assuming true")
     else
-        $(warning "Aospify: Current bootanimation res is not supported, forcing 1080p")
+        $(warning "Aospify: Current bootanimation flag is not supported, forcing true")
     endif
-    PRODUCT_COPY_FILES += vendor/aosp/bootanimation/bootanimation-dark_1080.zip:$(TARGET_COPY_OUT_PRODUCT)/media/bootanimation-dark.zip
+    PRODUCT_COPY_FILES += vendor/aosp/bootanimation/bootanimation.zip:$(TARGET_COPY_OUT_PRODUCT)/media/bootanimation.zip
 endif
 
 # Screen recorder
